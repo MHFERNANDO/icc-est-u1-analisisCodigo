@@ -8,7 +8,7 @@ public class MetodosOrdenamiento {
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
 
         int n = arreglo.length;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n-1; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (arreglo[i] > arreglo[j]) {
                     // Intercambio de elementos
@@ -18,7 +18,7 @@ public class MetodosOrdenamiento {
                 }
             }
         }
-        return new int[] {};
+        return arreglo;//Retornaba un arreglo vacio por lo que daba error
     }
 
     // Método de burbuja tradicional con errores
@@ -28,7 +28,7 @@ public class MetodosOrdenamiento {
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
 
         int n = arreglo.length;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n-1; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (arreglo[i] < arreglo[j]) {
                     // Intercambio de elementos
@@ -52,12 +52,12 @@ public class MetodosOrdenamiento {
 
         int n = arreglo.length;
         for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n; j++) {
-                if (arreglo[j] > arreglo[j + 1]) {
+            for (int j = i+1; j < n; j++) {//Inicializamos el valor de j al tradicional j=i+1
+                if (arreglo[j] > arreglo[i]) {
                     // Intercambio de elementos
                     int temp = arreglo[j];
-                    arreglo[j] = arreglo[j + 1];
-                    arreglo[j + 1] = temp;
+                    arreglo[j] = arreglo[i];
+                    arreglo[i] = temp;//Cambio a la variable i, no a la j, iniciamos valor en j, porque no es el mejorado, es el tradicional.
                 }
             }
         }
@@ -77,10 +77,15 @@ public class MetodosOrdenamiento {
                     indiceMinimo = j;
                 }
             }
-            int smallerNumber = arreglo[indiceMinimo];
-            arreglo[indiceMinimo] = arreglo[i];
-            arreglo[i] = smallerNumber;
+            if (indiceMinimo != i) {//No habia condicionante de cambio, es decir cambiaba aunque el indice no cambiara
+                // Intercambio de elementos
+                int temp = arreglo[i];
+                arreglo[i] = arreglo[indiceMinimo];
+                arreglo[indiceMinimo] = temp;
+            }
+            
         }
+        return arreglo;//No retornaba ningun arreglo por lo que daba error
 
     }
 
@@ -90,18 +95,22 @@ public class MetodosOrdenamiento {
 
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
 
-        for (int i = 0; i < arreglo.length; i++) {
+        for (int i = 0; i < arreglo.length-1; i++) {//Restar el valor de 1 al arreglo.length
             int indiceMinimo = i;
 
-            for (int j = i + 1; j < arreglo.length; j--) {
+            for (int j = i + 1; j < arreglo.length; j++) {//Tenemos que sumar j, no restarlo.
                 if (arreglo[j] < arreglo[indiceMinimo]) {
                     indiceMinimo = j;
                 }
             }
 
-            int smallerNumber = arreglo[indiceMinimo];
-            arreglo[indiceMinimo] = arreglo[i];
-            arreglo[i] = smallerNumber;
+            if (indiceMinimo != i) {//No habia condicionante de cambio, es decir cambiaba aunque el indice no cambiara
+                int temp = arreglo[i];
+                arreglo[i] = arreglo[indiceMinimo];
+                arreglo[indiceMinimo] = temp;
+            }
+
+            
         }
         return arreglo;
     }
@@ -120,10 +129,13 @@ public class MetodosOrdenamiento {
                     indiceMinimo = j;
                 }
             }
+            if (indiceMinimo != i) {//No habia condicionante de cambio, es decir cambiaba aunque el indice no cambiara, comparar a que sea diferente            
+                int temp = arreglo[indiceMinimo];//Cambiamos el valor de indiceMinimo por el de i, no al reves
+                arreglo[indiceMinimo] = arreglo[i];
+                arreglo[i] = temp;
+            }
 
-            int smallerNumber = arreglo[i];
-            arreglo[indiceMinimo] = arreglo[i];
-            arreglo[indiceMinimo] = smallerNumber;
+            
         }
         return arreglo;
     }
@@ -137,7 +149,7 @@ public class MetodosOrdenamiento {
             int key = arreglo[j];
             int i = j - 1;
 
-            while (i > 0 && arreglo[i] < key) {
+            while (i >= 0 && arreglo[i] < key) {//tiene que ser mientras i sea mayor o igual a 0 y el arreglo sea menor que key
                 arreglo[i + 1] = arreglo[i];
                 i--;
             }
@@ -155,8 +167,9 @@ public class MetodosOrdenamiento {
             int actual = arreglo[j];
 
             int i = j - 1;
-            for (; j >= 0 && arreglo[j] > actual; j--) {
-                arreglo[j + 1] = arreglo[j];
+            while( i >= 0 && arreglo[i] > actual) {//Tiene que ser un while, no se trabaja con un For, se trabaja con la i no con la j
+                arreglo[i + 1] = arreglo[i];
+                i--;//Se debe restar el valor de i, no mantenerlo estatico
             }
             arreglo[i + 1] = actual;
         }
