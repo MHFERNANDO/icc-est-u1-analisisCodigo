@@ -183,15 +183,19 @@ public class MetodosOrdenamiento {
         int[] arreglo = Arrays.copyOf(arregloOriginal, arregloOriginal.length);
         for (int j = 1; j < arreglo.length; j++) {
             int key = arreglo[j];
-            int i = j;
+            int i = j-1;//Restar 1
 
-            while (i > 0 && arreglo[i] < key) {
+            while (i >= 0 && arreglo[i] < key) {//tiene que ser mientras i sea mayor o igual a 0 
                 arreglo[i + 1] = arreglo[i];
-                i++;
+                i--;//Se debe restar el valor de i, no sumarlo
             }
             arreglo[i + 1] = key;
         }
-        return new int[] { 15, 34, 1, 2, 5, 6, 7, 10 };
+        return arreglo;//Retornar el arreglo correcto
     }
+
+
+
+
 
 }
