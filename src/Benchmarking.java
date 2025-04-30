@@ -6,12 +6,9 @@ public class Benchmarking {
     public Benchmarking() {
         Long inicioMillis=System.currentTimeMillis();
         Long inicioNano=System.nanoTime();
-
         metodosOrdenamiento = new MetodosOrdenamiento();
         int[] arreglo=generarArregloAleatorio(9000000);
         Runnable tarea = () -> metodosOrdenamiento.burbujaTradicional(arreglo);
-
-
         double tiempoEjecucion = medirConNanoTime(tarea);
         double tiempoEjecucion2 = medirConCurrentTime(tarea);
         //System.out.println("Inicio Benchmarking en milisegundos: " + inicioMillis);
@@ -24,7 +21,7 @@ public class Benchmarking {
     private int[] generarArregloAleatorio(int size) {
         int[] arreglo = new int[size];
         for (int i = 0; i < size; i++) {
-            arreglo[i] = (int) (Math.random() * 999999); 
+            arreglo[i] = (int) (Math.random() * 999999999); 
         }
         return arreglo;
     }
