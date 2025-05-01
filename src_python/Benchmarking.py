@@ -4,6 +4,11 @@ import metodosOrdenamiento
 class Benchmarking:
     def __init__(self):
         print("Benchmarking inicializado")
+                
+                
+                
+    def ejemplo(self):
+        print("Benchmarking inicializado")
         self.mOrdenamiento = metodosOrdenamiento.metodosOrdenamiento()
         arreglo = self.buildArreglo(10000)
         tarea=lambda: self.mOrdenamiento.sortByBubble(arreglo)
@@ -11,7 +16,7 @@ class Benchmarking:
         tiempoNano=self.contar_con_nano_time(tarea)
         print(f"Tiempo en milisegundos: {tiempoMilles}")
         print(f"Tiempo en nanosegundos: {tiempoNano}")
-        
+
         
         
         
@@ -20,7 +25,7 @@ class Benchmarking:
         
         arreglo=[]
         for i in range(n):
-            numero=random.randint(0,99999)
+            numero=random.randint(0,n+10)
             arreglo.append(numero)
         return arreglo
     
@@ -36,3 +41,9 @@ class Benchmarking:
         tarea()
         end_time = time.time_ns()
         return (end_time - start_time) / 1000000000
+    
+    def medir_tiempo(self, tarea,array):
+        inicio = time.perf_counter()#Parecido que el nano, en python existe esta otra opcion
+        tarea(array)
+        fin = time.perf_counter()
+        return (fin - inicio) 
