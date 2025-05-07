@@ -1,5 +1,6 @@
 import Benchmarking as Be
 import metodosOrdenamiento
+import matplotlib.pyplot as plt
 
 
 if __name__=="__main__":
@@ -7,23 +8,41 @@ if __name__=="__main__":
     Be.Benchmarking()
     
     #Instancias
-    metodos=metodosOrdenamiento.metodosOrdenamiento()
+    metodosI=metodosOrdenamiento.metodosOrdenamiento()
     benchmarking=Be.Benchmarking()
     
-    n=10000
-    arreglo = benchmarking.buildArreglo(n)
+    nT=[500,1000,2000]
+
     
     #Diccionario de metodos
-    metodos = {"Burbuja" : metodos.sortByBubble, "Seleccion": metodos.sortBySelection} 
+    tiemposByMetdo ={
+       "Burbuja":[],
+       "Seleccion":[]
+     }
     
-    resultados = []
     
-    
-    for nombre, metodo in metodos.items():
-        tiempo=benchmarking.medir_tiempo(metodo, arreglo)
-        resultadosTupla=(n,nombre,tiempo)
-        resultados.append(resultadosTupla)
+    for n in nT:
         
-    for resultado in resultados:
-        tam,nombre,tiempo=resultado
-        print(f"tamanio: {tam}, metodo: {nombre}, tiempo: {tiempo:.6f} segundos")
+        arreglo = benchmarking.buildArreglo(n)
+        metodos = {"Burbuja" : metodosI.sortByBubble, 
+                   "Seleccion": metodosI.sortBySelection}
+        for nombre, metodo in metodos.items():
+            tiempo=benchmarking.medir_tiempo(metodo, arreglo)
+            tiemposByMetdo[nombre].append((tiempo))
+            print(f"tamanio: {n}, metodo: {nombre}, tiempo: {tiempo:.6f} segundos")
+            
+        
+    plt.figure(figsize=(10, 6))
+    
+    #En y los tiempos y en x el tamaño del arreglo
+    for nombre, tiempos in tiemposByMetdo.items():
+        plt.plot(nT, tiempos, marker='o', label=nombre)
+        
+    plt.grid()
+    plt.title("Fernando Martinez\n"
+              "Tiempos de Ejecucion de Algoritmos de Ordenamiento")
+    plt.xlabel("Tamaño del Arreglo")
+    plt.ylabel("Tiempo (segundos)")
+    plt.legend()
+    plt.show()
+    

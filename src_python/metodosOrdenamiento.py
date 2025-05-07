@@ -25,4 +25,6 @@ class metodosOrdenamiento:
                     arreglo[i] = arreglo[min_index]
                     arreglo[min_index] = aux
         return arreglo
+    
+metodos = metodosOrdenamiento()
         
