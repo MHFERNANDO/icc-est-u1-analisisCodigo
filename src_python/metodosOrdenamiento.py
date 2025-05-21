@@ -27,4 +27,4 @@ class metodosOrdenamiento:
         return arreglo
     
 metodos = metodosOrdenamiento()
-        
+            

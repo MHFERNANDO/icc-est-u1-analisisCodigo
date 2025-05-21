@@ -39,6 +39,7 @@ if __name__=="__main__":
         plt.plot(nT, tiempos, marker='o', label=nombre)
         
     plt.grid()
+    
     plt.title("Fernando Martinez\n"
               "Tiempos de Ejecucion de Algoritmos de Ordenamiento")
     plt.xlabel("Tamaño del Arreglo")
@@ -46,3 +47,4 @@ if __name__=="__main__":
     plt.legend()
     plt.show()
     
+    plt.get_current_fig_manager().set_window_title("Comparación de Métodos - Fernando Martínez-9:01")
